@@ -1,8 +1,8 @@
-import {SquareType} from "../domain/SquareType";
 import {Square} from "./Square";
+import {Squares} from "../domain/Square";
 
 type BoardProps = {
-    squares: Array<SquareType>
+    squares: Squares
     onClick: (i: number) => void
 }
 
@@ -11,7 +11,7 @@ export function Board(props: BoardProps) {
     const renderSquare = (i: number) => {
         return (
             <Square
-                value={props.squares[i]}
+                value={props.squares.value[i]}
                 onClick={() => props.onClick(i)}
             />
         )

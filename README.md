@@ -1,3 +1,12 @@
+# リアクト　チュートリアルをtsで
+
+- [チュート](https://ja.reactjs.org/tutorial/tutorial.html)
+- [これみた](https://qiita.com/m0a/items/d723259cdeebe382b5f6)
+
+# 以下テンプレ
+
+--- 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -2,37 +2,62 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-interface SquareStates {
-    value: '×' | '○' | null
+type SquareType = 'X' | 'O' | null
+
+
+type SquareProps = {
+    value: SquareType
+    onClick: () => void
 }
 
-class Square extends React.Component<any, SquareStates> {
-    constructor(props: any) {
-        super(props)
-        this.state = {
-            value: null
-        }
-    }
+class Square extends React.Component<SquareProps> {
 
     render() {
         return (
             <button
                 className="square"
-                onClick={() => this.setState({value: '×'})}
+                onClick={this.props.onClick}
             >
-                {this.state.value}
+                {this.props.value}
             </button>
         );
     }
 }
 
-class Board extends React.Component {
+type BoardStates = {
+    squares: Array<SquareType>
+    isXTurn: boolean
+}
+
+class Board extends React.Component<any, BoardStates> {
+    constructor(props: any) {
+        super(props)
+        this.state = {
+            squares: Array(9).fill(null),
+            isXTurn: true
+        }
+    }
+
+    handleClick(i: number) {
+        const squares = this.state.squares.slice()
+        squares[i] = this.state.isXTurn ? 'X' : 'O'
+        this.setState({
+            squares: squares,
+            isXTurn: !this.state.isXTurn
+        })
+    }
+
     renderSquare(i: number) {
-        return <Square value={i}/>;
+        return (
+            <Square
+                value={this.state.squares[i]}
+                onClick={() => this.handleClick(i)}
+            />
+        )
     }
 
     render() {
-        const status = 'Next player: X';
+        const status = 'Next player: ' + (this.state.isXTurn ? 'X' : 'O')
 
         return (
             <div>

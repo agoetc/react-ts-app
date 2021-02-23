@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 interface SquareStates {
-    value: string | null
+    value: '×' | '○' | null
 }
 
 class Square extends React.Component<any, SquareStates> {
@@ -18,10 +18,7 @@ class Square extends React.Component<any, SquareStates> {
         return (
             <button
                 className="square"
-                onClick={() => {
-                    this.setState({value: 'X'})
-                }
-                }
+                onClick={() => this.setState({value: '×'})}
             >
                 {this.state.value}
             </button>

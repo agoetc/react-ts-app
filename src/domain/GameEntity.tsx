@@ -7,7 +7,7 @@ export class GameEntity {
         this.squares = Squares.init()
     }
 
-    calculateWinner = (): SquareType => {
+    calculateWinner = (): SquareType | null => {
         const lines = [
             [0, 1, 2],
             [3, 4, 5],

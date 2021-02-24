@@ -1,4 +1,4 @@
-export type SquareType = 'X' | 'O' | null
+export type SquareType = 'X' | 'O'
 
 export class Squares {
     value: Array<SquareType>

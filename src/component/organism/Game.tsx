@@ -1,34 +1,37 @@
 import {useState} from "react";
 import {Board} from "../molecule/Board";
-import {Squares} from "../../domain/Square";
+import {GameEntity} from "../../domain/GameEntity";
 
 export function Game() {
-    const [squares, setSquares] = useState<Squares>(Squares.init)
+    const [game, setGame] = useState<GameEntity>(new GameEntity)
     const [isXTurn, setIsXTurn] = useState(true)
 
     const handleClick = (i: number): void => {
-        if (squares.calculateWinner() || squares.value[i]) {
-            return;
-        }
-        squares.value[i] = isXTurn ? 'X' : 'O'
-        setSquares(squares)
+        if (game.calculateWinner() || game.squares.value[i]) return
+
+        game.setSquare(i, turnOf())
+
+        setGame(game)
         setIsXTurn(!isXTurn)
     }
 
     const buildStatusMessage = (): string => {
-        const winner = squares.calculateWinner();
+        const winner = game.calculateWinner();
         if (winner) {
             return 'Winner: ' + winner
         } else {
-            return 'Next player: ' + (isXTurn ? 'X' : 'O')
+            return 'Next player: ' + turnOf()
         }
     }
+
+    const turnOf = () => isXTurn ? 'X' : 'O'
+
 
     return (
         <div className="game">
             <div className="game-board">
                 <Board
-                    squares={squares}
+                    squares={game.squares}
                     onClick={i => handleClick(i)}
                 />
             </div>

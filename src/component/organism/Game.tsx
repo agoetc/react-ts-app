@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {Board} from "./Board";
-import {Squares} from "../domain/Square";
+import {Board} from "../molecule/Board";
+import {Squares} from "../../domain/Square";
 
 export function Game() {
     const [squares, setSquares] = useState<Squares>(Squares.init)

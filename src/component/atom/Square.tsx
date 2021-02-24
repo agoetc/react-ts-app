@@ -1,4 +1,4 @@
-import {SquareType} from "../domain/Square";
+import {SquareType} from "../../domain/Square";
 
 type SquareProps = {
     value: SquareType

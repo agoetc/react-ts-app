@@ -1,5 +1,5 @@
-import {Square} from "./Square";
-import {Squares} from "../domain/Square";
+import {Square} from "../atom/Square";
+import {Squares} from "../../domain/Square";
 
 type BoardProps = {
     squares: Squares

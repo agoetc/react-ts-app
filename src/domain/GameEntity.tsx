@@ -2,9 +2,11 @@ import {Squares, SquareType} from "./Square";
 
 export class GameEntity {
     squares: Squares
+    turn: SquareType
 
     constructor() {
         this.squares = Squares.init()
+        this.turn = 'X'
     }
 
     calculateWinner = (): SquareType | null => {
@@ -29,7 +31,18 @@ export class GameEntity {
         return null;
     }
 
-    setSquare = (i: number, turnOf: SquareType): void => {
-        this.squares.value[i] = turnOf
+    canSet = (i: number): boolean => {
+        return (this.calculateWinner() === null && this.squares.value[i] === null)
+    }
+
+    setSquare = (i: number): void => {
+        this.squares.value[i] = this.turn
+        this.changeTurn()
+    }
+
+    private changeTurn = (): void => {
+        if (this.turn === 'X') this.turn = 'O'
+        else this.turn = 'X'
+
     }
 }

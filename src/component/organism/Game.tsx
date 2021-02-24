@@ -4,15 +4,16 @@ import {GameEntity} from "../../domain/GameEntity";
 
 export function Game() {
     const [game, setGame] = useState<GameEntity>(new GameEntity)
-    const [isXTurn, setIsXTurn] = useState(true)
 
     const handleClick = (i: number): void => {
-        if (game.calculateWinner() || game.squares.value[i]) return
+        if (game.canSet(i)) {
+            game.setSquare(i)
 
-        game.setSquare(i, turnOf())
-
-        setGame(game)
-        setIsXTurn(!isXTurn)
+            // hooksがObjectの変更を探知しないので、とりあえずの対処
+            setGame(Object.assign({}, game))
+        } else {
+            return
+        }
     }
 
     const buildStatusMessage = (): string => {
@@ -20,12 +21,9 @@ export function Game() {
         if (winner) {
             return 'Winner: ' + winner
         } else {
-            return 'Next player: ' + turnOf()
+            return 'Next player: ' + game.turn // FIXME: 何故か反映されない
         }
     }
-
-    const turnOf = () => isXTurn ? 'X' : 'O'
-
 
     return (
         <div className="game">
